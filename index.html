@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玄学命理网 - 专业命理咨询服务平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>玄学命理</h1>
+                    <span class="tagline">传承千年智慧，解读人生奥秘</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#bazi">八字排盘</a></li>
+                    <li><a href="#name">姓名学</a></li>
+                    <li><a href="#fengshui">风水</a></li>
+                    <li><a href="#constellation">星座运势</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 首页横幅 -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>探索玄学奥秘，洞察人生轨迹</h2>
+                <p>专业的命理分析，助您了解自我，把握未来</p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('bazi')">立即算命</button>
+                    <button class="btn-secondary" onclick="scrollToSection('name')">姓名分析</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 八字排盘功能 -->
+        <section id="bazi" class="feature-section">
+            <div class="container">
+                <h2>八字排盘</h2>
+                <p class="section-desc">输入您的出生信息，获得专业的八字命理分析</p>
+
+                <div class="bazi-calculator">
+                    <div class="input-group">
+                        <label for="birth-date">出生日期：</label>
+                        <input type="date" id="birth-date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="birth-time">出生时间：</label>
+                        <input type="time" id="birth-time" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="gender">性别：</label>
+                        <select id="gender">
+                            <option value="male">男</option>
+                            <option value="female">女</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="calculateBazi()">排盘分析</button>
+                </div>
+
+                <div id="bazi-result" class="result-panel" style="display: none;">
+                    <h3>八字排盘结果</h3>
+                    <div id="bazi-details"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 姓名学功能 -->
+        <section id="name" class="feature-section">
+            <div class="container">
+                <h2>姓名学分析</h2>
+                <p class="section-desc">通过姓名的音、形、义，分析其寓意和影响</p>
+
+                <div class="name-calculator">
+                    <div class="input-group">
+                        <label for="chinese-name">中文姓名：</label>
+                        <input type="text" id="chinese-name" placeholder="请输入中文姓名" required>
+                    </div>
+                    <button class="btn-primary" onclick="analyzeName()">分析姓名</button>
+                </div>
+
+                <div id="name-result" class="result-panel" style="display: none;">
+                    <h3>姓名分析结果</h3>
+                    <div id="name-details"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 风水功能 -->
+        <section id="fengshui" class="feature-section">
+            <div class="container">
+                <h2>风水方位计算器</h2>
+                <p class="section-desc">计算您的风水吉位，优化居住环境</p>
+
+                <div class="fengshui-calculator">
+                    <div class="input-group">
+                        <label for="birth-year">出生年份：</label>
+                        <input type="number" id="birth-year" placeholder="如：1990" min="1900" max="2024">
+                    </div>
+                    <div class="input-group">
+                        <label for="fengshui-gender">性别：</label>
+                        <select id="fengshui-gender">
+                            <option value="male">男</option>
+                            <option value="female">女</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" onclick="calculateFengshui()">计算方位</button>
+                </div>
+
+                <div id="fengshui-result" class="result-panel" style="display: none;">
+                    <h3>风水方位分析</h3>
+                    <div id="fengshui-details"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 星座运势 -->
+        <section id="constellation" class="feature-section">
+            <div class="container">
+                <h2>星座运势</h2>
+                <p class="section-desc">查看您的星座运势，了解近期运势走向</p>
+
+                <div class="constellation-selector">
+                    <div class="zodiac-grid">
+                        <div class="zodiac-sign" data-sign="aries" onclick="getConstellationHoroscope('aries')">
+                            <div class="zodiac-icon">♈</div>
+                            <span>白羊座</span>
+                            <small>3.21-4.19</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="taurus" onclick="getConstellationHoroscope('taurus')">
+                            <div class="zodiac-icon">♉</div>
+                            <span>金牛座</span>
+                            <small>4.20-5.20</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="gemini" onclick="getConstellationHoroscope('gemini')">
+                            <div class="zodiac-icon">♊</div>
+                            <span>双子座</span>
+                            <small>5.21-6.21</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="cancer" onclick="getConstellationHoroscope('cancer')">
+                            <div class="zodiac-icon">♋</div>
+                            <span>巨蟹座</span>
+                            <small>6.22-7.22</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="leo" onclick="getConstellationHoroscope('leo')">
+                            <div class="zodiac-icon">♌</div>
+                            <span>狮子座</span>
+                            <small>7.23-8.22</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="virgo" onclick="getConstellationHoroscope('virgo')">
+                            <div class="zodiac-icon">♍</div>
+                            <span>处女座</span>
+                            <small>8.23-9.22</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="libra" onclick="getConstellationHoroscope('libra')">
+                            <div class="zodiac-icon">♎</div>
+                            <span>天秤座</span>
+                            <small>9.23-10.23</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="scorpio" onclick="getConstellationHoroscope('scorpio')">
+                            <div class="zodiac-icon">♏</div>
+                            <span>天蝎座</span>
+                            <small>10.24-11.22</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="sagittarius" onclick="getConstellationHoroscope('sagittarius')">
+                            <div class="zodiac-icon">♐</div>
+                            <span>射手座</span>
+                            <small>11.23-12.21</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="capricorn" onclick="getConstellationHoroscope('capricorn')">
+                            <div class="zodiac-icon">♑</div>
+                            <span>摩羯座</span>
+                            <small>12.22-1.19</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="aquarius" onclick="getConstellationHoroscope('aquarius')">
+                            <div class="zodiac-icon">♒</div>
+                            <span>水瓶座</span>
+                            <small>1.20-2.18</small>
+                        </div>
+                        <div class="zodiac-sign" data-sign="pisces" onclick="getConstellationHoroscope('pisces')">
+                            <div class="zodiac-icon">♓</div>
+                            <span>双鱼座</span>
+                            <small>2.19-3.20</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="constellation-result" class="result-panel" style="display: none;">
+                    <h3 id="constellation-title">星座运势</h3>
+                    <div id="constellation-details"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我们 -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>关于我们</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>玄学命理网致力于传承中华传统文化，为用户提供专业、准确的命理咨询服务。我们结合传统命理学与现代科技，让古老的智慧在数字时代焕发新的生机。</p>
+                        <p>我们的团队由资深命理师和软件开发专家组成，确保每一项功能都既准确又易用。</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">🔮</div>
+                            <h4>专业准确</h4>
+                            <p>基于传统命理学理论，确保分析结果的专业性</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">📱</div>
+                            <h4>方便易用</h4>
+                            <p>简洁的界面设计，让复杂的命理分析变得简单</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🎯</div>
+                            <h4>个性定制</h4>
+                            <p>根据个人情况提供量身定制的命理建议</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🔒</div>
+                            <h4>隐私保护</h4>
+                            <p>严格保护用户隐私，所有数据仅在本地处理</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>玄学命理网</h3>
+                    <p>传承千年智慧，解读人生奥秘</p>
+                </div>
+                <div class="footer-section">
+                    <h4>功能导航</h4>
+                    <ul>
+                        <li><a href="#bazi">八字排盘</a></li>
+                        <li><a href="#name">姓名学</a></li>
+                        <li><a href="#fengshui">风水</a></li>
+                        <li><a href="#constellation">星座运势</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系方式</h4>
+                    <p>邮箱：info@xuanxue.com</p>
+                    <p>电话：400-888-8888</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 玄学命理网. 版权所有. | 仅供娱乐参考</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
