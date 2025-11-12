@@ -1,7 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Upload one day project\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git config user.name \"claude-user\")",
+      "Bash(git config user.email \"claude-user@example.com\")",
+      "Bash(gh repo create one-day-project --public --description \"One day project - HTML, CSS and JavaScript application\")",
+      "Bash(git remote add origin https://github.com/sheng-lyf/one-day-project.git)",
+      "Bash(cat script.js)",
+      "Bash(script_temp.js)",
+      "Bash(script_temp2.js)",
+      "Bash(temp_header.js)",
+      "Bash(cat temp_header.js script.js)",
+      "Bash(temp_script.js)",
+      "Bash(git config user.name \"sheng-lyf\")",
+      "Bash(git config user.email \"sheng-lyf@users.noreply.github.com\")"
     ],
     "deny": [],
     "ask": []
